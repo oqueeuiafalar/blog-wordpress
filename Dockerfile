@@ -1,6 +1,9 @@
 FROM ubuntu:16.04
 MAINTAINER Tácio Tavares
-RUN useradd -ms /bin/bash natalia
+
+RUN apt-get update && \
+	apt-get install nginx --assume-yes
+
+RUN useradd --create-home --shell /bin/bash natalia
 USER natalia
 WORKDIR /home/natalia
-# RUN sudo apt-get update && sudo apt-get install nginx
