@@ -28,7 +28,13 @@ function devhelp {
 }
 
 function build_docker_image {
-    docker build -t taciogt/wordpress:v1 .
+    dorun "docker build -t taciogt/wordpress:v1 ." "Cria a imagem do container para o blog"
+}
+
+function run_docker_container {
+    dorun "docker stop blog_natalia" "Para o container anterior"
+    dorun "docker rm blog_natalia" "Remove o container anterior"
+    dorun "docker run -d --name blog_natalia -p 8002:8002 -it taciogt/wordpress:v1" "Inicia o container do blog"
 }
 
 
@@ -44,19 +50,19 @@ function produce_alias {
 }
 
 function echo_red {
-    echo -e "\e[31m$1\e[0m";
+    echo -e "${RED}$1${RESTORE}";
 }
 
 function echo_green {
-    echo -e "\e[32m$1\e[0m";
+    echo -e "${GREEN}$1${RESTORE}";
 }
 
 function echo_yellow {
     echo -e "${YELLOW}$1${RESTORE}";
 }
 
-function now_milis {
-    date +%s%N | cut -b1-13
+function now_seconds {
+    date +%s | cut -b1-13
 }
 
 function dorun {
@@ -65,17 +71,17 @@ function dorun {
     echo ----------------------------------
     echo_green "STARTING $name ..."
     echo "$cmd"
-    t1=$(now_milis)
+    t1=$(now_seconds)
     $cmd
     exitcode=$?
-    t2=$(now_milis)
+    t2=$(now_seconds)
     delta_t=$(expr $t2 - $t1)
     if [ $exitcode == 0 ]
     then
-        echo_green "FINISHED $name in $delta_t ms"
+        echo_green "FINISHED $name in $delta_t s"
         echo ----------------------------------
     else
-        echo_red "ERROR! $name (status: $exitcode, time: $delta_t ms)"
+        echo_red "ERROR! $name (status: $exitcode, time: $delta_t s)"
         echo ----------------------------------
         return $exitcode
     fi
