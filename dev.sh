@@ -34,7 +34,7 @@ function build_docker_image {
 function run_docker_container {
     dorun "docker stop blog_natalia" "Para o container anterior"
     dorun "docker rm blog_natalia" "Remove o container anterior"
-    dorun "docker run -d --name blog_natalia -p 8002:8002 -it taciogt/wordpress:v1" "Inicia o container do blog"
+    dorun "docker run -d --name blog_natalia -p 8002:80 -it taciogt/wordpress:v1" "Inicia o container do blog"
 }
 
 
