@@ -2,7 +2,7 @@
 RESTORE='\033[0m'
 RED='\033[00;31m'
 GREEN='\033[00;32m'
-YELLOW='\e[0;33m'
+YELLOW='\033[00;33m'
 
 
 # Pq ninguem merece ter que ficar decorando comando
@@ -25,6 +25,8 @@ function devhelp {
     echo -e ""
     echo -e "${GREEN}build_docker_image${RESTORE}   Builda a imagem do docker"
     echo -e ""
+    echo -e "${GREEN}run_docker_container${RESTORE} Executa o container docker"
+    echo -e ""
 }
 
 function build_docker_image {
@@ -35,6 +37,7 @@ function run_docker_container {
     dorun "docker stop blog_natalia" "Para o container anterior"
     dorun "docker rm blog_natalia" "Remove o container anterior"
     dorun "docker run -d --name blog_natalia -p 8002:80 -it taciogt/wordpress:v1" "Inicia o container do blog"
+    echo_yellow "Agora o container está disponível aqui: `docker-machine ip default`:8002"
 }
 
 
