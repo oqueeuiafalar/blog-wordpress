@@ -2,8 +2,9 @@ FROM ubuntu:16.04
 MAINTAINER Tácio Tavares
 
 RUN apt-get update --quiet && \
-apt-get upgrade --quiet --assume-yes && \
-apt-get install nginx --assume-yes
+    apt-get upgrade --quiet --assume-yes && \
+    apt-get install nginx --assume-yes && \
+    apt-get install sudo --assume-yes
 
 RUN useradd --create-home --shell /bin/bash natalia
 RUN gpasswd -a natalia sudo
