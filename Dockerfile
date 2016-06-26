@@ -1,10 +1,18 @@
 FROM ubuntu:16.04
 MAINTAINER Tácio Tavares
 
-RUN apt-get update --quiet && \
-    apt-get upgrade --quiet --assume-yes && \
+ENV TERM xterm
+
+# Install packages
+RUN apt-get update && \  
+    apt-get upgrade --assume-yes && \
     apt-get install nginx --assume-yes && \
-    apt-get install sudo --assume-yes
+    apt-get install sudo --assume-yes && \
+    apt-get install nano --assume-yes && \
+    DEBIAN_FRONTEND=noninteractive apt-get install mysql-server --assume-yes && \
+    apt-get install php-fpm php-mysql --assume-yes
+
+COPY configs/php.ini /etc/php/7.0/fpm/
 
 RUN useradd --create-home --shell /bin/bash natalia
 RUN gpasswd -a natalia sudo

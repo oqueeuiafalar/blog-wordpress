@@ -41,6 +41,9 @@ function run_docker_container {
     echo_yellow "ou aqui: http://`docker-machine ip default`:8002/"
 }
 
+function attach_to_container_shell {
+    dorun "docker exec -i -t blog_natalia bash" "Executa o bash do container"
+}
 
 function produce_alias {
     echo "------------------------------------------------------------------------"
