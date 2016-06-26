@@ -38,6 +38,7 @@ function run_docker_container {
     dorun "docker rm blog_natalia" "Remove o container anterior"
     dorun "docker run -d --name blog_natalia -p 8002:80 -it taciogt/wordpress:v1" "Inicia o container do blog"
     echo_yellow "Agora o container está disponível aqui: http://0.0.0.0:8002/"
+    echo_yellow "ou aqui: http://`docker-machine ip default`:8002/"
 }
 
 
