@@ -20,6 +20,8 @@ cd $CD
 
 #. ci/funcs.sh
 
+CONTAINER_NAME="wordpress"
+
 function devhelp {
     echo -e "${GREEN}devhelp${RESTORE}              Imprime este ${RED}help${RESTORE}"
     echo -e ""
@@ -30,19 +32,19 @@ function devhelp {
 }
 
 function build_docker_image {
-    dorun "docker build -t taciogt/wordpress:v1 ." "Cria a imagem do container para o blog"
+    dorun "docker build -t taciogt/wordpress:0.1 ." "Cria a imagem do container para o blog"
 }
 
 function run_docker_container {
-    dorun "docker stop blog_natalia" "Para o container anterior"
-    dorun "docker rm blog_natalia" "Remove o container anterior"
-    dorun "docker run -d --name blog_natalia -p 8002:80 -it taciogt/wordpress:v1" "Inicia o container do blog"
+    dorun "docker stop $CONTAINER_NAME" "Para o container anterior"
+    dorun "docker rm $CONTAINER_NAME" "Remove o container anterior"
+    dorun "docker run -d --name $CONTAINER_NAME -p 8002:80 -it taciogt/wordpress:v1" "Inicia o container do blog"
     echo_yellow "Agora o container está disponível aqui: http://0.0.0.0:8002/"
     echo_yellow "ou aqui: http://`docker-machine ip default`:8002/"
 }
 
 function attach_to_container_shell {
-    dorun "docker exec -i -t blog_natalia bash" "Executa o bash do container"
+    dorun "docker exec -i -t $CONTAINER_NAME bash" "Executa o bash do container"
 }
 
 function produce_alias {
