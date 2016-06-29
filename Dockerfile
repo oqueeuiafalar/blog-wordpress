@@ -13,6 +13,7 @@ RUN apt-get update && \
     apt-get install php-fpm php-mysql --assume-yes
 
 COPY configs/php.ini /etc/php/7.0/fpm/
+COPY configs/nginx.conf /etc/nginx/sites-available/default
 
 RUN useradd --create-home --shell /bin/bash natalia
 RUN gpasswd -a natalia sudo

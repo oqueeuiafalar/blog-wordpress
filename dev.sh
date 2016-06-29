@@ -32,7 +32,7 @@ function devhelp {
 }
 
 function build_docker_image {
-    dorun "docker build -t taciogt/wordpress:0.1 ." "Cria a imagem do container para o blog"
+    dorun "docker build -t taciogt/wordpress:v1 ." "Cria a imagem do container para o blog"
 }
 
 function run_docker_container {
